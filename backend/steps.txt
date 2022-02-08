@@ -1,0 +1,78 @@
+Fullstack application steps:
+1. create a new folder for front-end: npm init vite@latest => creates a react project
+2.Create a new folder for back-end: npm init => creates package.json
+
+//BACK-END steps:
+1.index.js: (launch server, connection to mongoDB)
+- To create a server with Express:
+  -install express : npm i express 
+  -install dotenv : npm i dotenv
+  -install mongoose: npm i mongoose (if we're working with mongoDB)
+
+-Connection with mongoDB:
+ const mongoose = require("mongoose");
+ mongoose.connect(process.env.URL (la variable URL est definie dans le fichier .env), {
+usenewUrlParser : true,
+useUnifiedTopology : true,
+}).then (()=> { console.log("Connected to MongoDB")});
+
+-Start Server:
+  const express = require("express");
+  const app = express();
+  app.listen(4000 (soit mettre "process.env.PORT" si la variable PORT est definie dans .env), () => console.log(`Server conencted on port ${process.env.PORT}`))
+app.use(express.json())
+app.use(routes
+
+
+-Create .env file that contains:
+PORT = 4000;
+URL = "mongodb://localhost:27017/dbName"
+
+2. create Models, routers, controllers
+
+-Models :
+1- Student.model.js : Schema for student (guid,firstname,lastName,group) + create the collection
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const studentSchema = new Schema({
+firstName: String,
+lastname: String,,
+group: String
+});
+
+create the collection:
+const Student = mongoose.model("Student", studentSchema);
+module.exports=Student
+
+
+2-Exo.model.js : Schema for Exo (id, title, description, date, duration, level) + collection
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema;
+const exoSchema = new Schema({
+guid : Number,
+title: {
+type: String;
+required: true,
+},
+description: String,
+date: Date,
+duration: Number,
+evel: String,
+students : [{type:Schema.Types.ObjectId, ref:"Student"}]
+//////
+...createcollection and all that , see above.
+/////
+
+3-Create Controllers:
+   -StudentController.js: CRUD for students
+const StudentController = {}
+module.exports = StudentController;
+
+4-Create routers:
+1- StrudentsRouter.js : routes for students
+DO NOT FORGET to import them app.use('/' , nameofRoute)
+
+
+
+
+
